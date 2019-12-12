@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = {
     form: {
@@ -23,7 +24,11 @@ const styles = {
         margin: '10px auto 10px auto'
     },
     button: {
-        marginTop: 20
+        marginTop: 20,
+        position: 'relative'
+    },
+    position: {
+        position: 'absolute'
     },
     customError: {
         color: 'red',
@@ -100,7 +105,12 @@ class login extends Component {
                         )}
                         <Button type="submit" variant="contained"
                         color="primary" className={classes.button} 
-                        >Login</Button>
+                        disabled={loading}
+                        >Login 
+                            {loading &&
+                            <CircularProgress size={20}
+                            className={classes.progress} />}
+                        </Button>
                         <br />
                         <small>Don't have an account? sign up 
                             <Link to="/signup"> here</Link>
