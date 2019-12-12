@@ -6,7 +6,7 @@ import login from './pages/login'
 import signup from './pages/signup'
 import Navbar from './components/Navbar'
 import themeObject from './util/theme';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const theme = createMuiTheme(themeObject);

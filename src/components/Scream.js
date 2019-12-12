@@ -28,7 +28,7 @@ class Scream extends Component {
                     title="Profile Image"
                     className={classes.image}
                     />
-                    <CardContent class={classes.content}>
+                    <CardContent className={classes.content}>
                         <Typography variant="h5" 
                             component={Link} to={`/users/${userHandle}`}
                             color="primary"
