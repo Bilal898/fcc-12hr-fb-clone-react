@@ -18,7 +18,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 
 const styles = theme => ({
-  ...theme.spreadIt
+  ...theme.spreadIt,
+  button: {
+    float: "right"
+  }
 });
 
 export class EditDetails extends Component {
