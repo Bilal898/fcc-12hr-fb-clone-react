@@ -13,6 +13,8 @@ import MyButton from "../util/MyButton";
 import ChatIcon from "@material-ui/icons/Chat";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import DeleteScream from "./DeleteScream";
+
 const styles = {
   card: {
     display: "flex",
@@ -43,6 +45,7 @@ class Scream extends Component {
   unlikeScream = () => {
     this.props.unlikeScream(this.props.scream.screamId);
   };
+
   render() {
     dayjs.extend(relativeTime);
     const {
@@ -56,7 +59,10 @@ class Scream extends Component {
         likeCount,
         commentCount
       },
-      user: { authenticated }
+      user: {
+        authenticated,
+        credentials: { handle }
+      }
     } = this.props;
     const likeButton = !authenticated ? (
       <MyButton tip="like">
@@ -73,6 +79,10 @@ class Scream extends Component {
         <FavoriteBorder color="primary" />
       </MyButton>
     );
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteScream screamId={screamId} />
+      ) : null;
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -89,6 +99,7 @@ class Scream extends Component {
           >
             {userHandle}
           </Typography>
+          {deleteButton}
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).fromNow()}
           </Typography>
