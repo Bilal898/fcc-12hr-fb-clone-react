@@ -7,6 +7,7 @@ import {
   UNLIKE_SCREAM,
   MARK_NOTIFICATIONS_READ
 } from "../types";
+import { stat } from "fs";
 
 const initialState = {
   authenticated: false,
@@ -38,7 +39,24 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-
+    case LIKE_SCREAM:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            screamId: action.payload.screamId
+          }
+        ]
+      };
+    case UNLIKE_SCREAM:
+      return {
+        ...state,
+        likes: state.likes.filter(
+          like => like.screamId === action.payload.screamId
+        )
+      };
     default:
       return state;
   }
