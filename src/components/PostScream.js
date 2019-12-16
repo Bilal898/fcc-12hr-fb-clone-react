@@ -19,7 +19,7 @@ import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 // Redux stuff
 import { connect } from "react-redux";
-import { postScream } from "../redux/actions/dataActions";
+import { postScream, clearErrors } from "../redux/actions/dataActions";
 import { useFormControl } from "@material-ui/core";
 
 const styles = theme => ({
@@ -50,8 +50,7 @@ class PostScream extends Component {
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: "" });
-      this.handleClose();
+      this.setState({ body: "", open: false, errors: {} });
     }
   }
   handleOpen = () => {
@@ -60,6 +59,7 @@ class PostScream extends Component {
     });
   };
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({
       open: false,
       errors: {}
@@ -145,8 +145,9 @@ const mapStateToProps = state => ({
 PostScream.propTypes = {
   classes: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
-  postScream: PropTypes.func.isRequired
+  postScream: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps, { postScream })(
+export default connect(mapStateToProps, { postScream, clearErrors })(
   withStyles(styles)(PostScream)
 );
