@@ -38,6 +38,9 @@ export default function(state = initialState, action) {
       let index = state.screams.findIndex(
         scream => scream.screamId === action.payload.screamId
       );
+      if (state.screams.screamId === action.payload.screamId) {
+        state.scream = action.payload;
+      }
       state.screams[index] = action.payload;
       return {
         ...state
